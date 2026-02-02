@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import *
+from PIL import Image, ImageTk
 
 frame = tk.Tk()
 frame.title("Pokédex Lucas")
@@ -7,21 +8,22 @@ frame.geometry("600x600")
 
 
 class Pokemon:
-    def __init__(self, name, level, type, attacks,region, evolution ):
+    def __init__(self, name, level, type, attacks,region, evolution, image ):
         self.name=name
         self.level=level
         self.type=type
         self.attacks=attacks
         self.region=region
         self.evolution=evolution
+        self.image=image
 
     def show_infos(self):
         label_name.config(text=f"Nom : {self.name} ")
-        label_level.config(text=f"Nom : {self.level} ")
-        label_type.config(text=f"Nom : {self.type} ")
-        label_atk.config(text=f"Nom : {self.attacks} ")
-        label_region.config(text=f"Nom : {self.region} ")
-        label_evolution.config(text=f"Nom : {self.evolution} ")
+        label_level.config(text=f"Niveau : {self.level} ")
+        label_type.config(text=f"Type : {self.type} ")
+        label_atk.config(text=f"Attaques : {self.attacks} ")
+        label_region.config(text=f"Région : {self.region} ")
+        label_evolution.config(text=f"Evolution : {self.evolution} ")
 
 
 
@@ -55,9 +57,6 @@ def add_pokemon():
     pokedex.append(poke)
     fill_pokedex(pokedex)
     hide_widgets()
-
-
-
 
 
 
@@ -109,6 +108,9 @@ def hide_widgets():
    
 # _________________________________________________ Labels d'information des pokemons _______________________________________________
 
+label_image = tk.Label(frame)
+label_image.pack()
+
 label_name=tk.Label(frame, text="Nom :")
 label_name.pack()
 
@@ -128,6 +130,7 @@ label_evolution=tk.Label(frame, text="Stade d'évolution :")
 label_evolution.pack()
 
 #_________________________________________________ Composants interface ______________________________________________________________
+
 list_pokemon=tk.Listbox(frame)
 list_pokemon.pack()
 list_pokemon.bind("<<ListboxSelect>>", select_list)
@@ -175,7 +178,7 @@ button_confirm_add.pack_forget()
 
 
 
-poke= Pokemon("pikachu",10,"Electric", "Lightning", "kanto", 2)
+poke= Pokemon("pikachu",10,"Electric", "Lightning", "kanto", 2, "./pokemon-img/Pikachu.png")
 pokedex.append(poke)
 fill_pokedex(pokedex)
 
