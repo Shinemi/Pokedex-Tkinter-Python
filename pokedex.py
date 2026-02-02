@@ -19,11 +19,24 @@ class Pokemon:
 
     def show_infos(self):
         label_name.config(text=f"Nom : {self.name} ")
+        label_name.grid(row=0 ,column=20)
+        
         label_level.config(text=f"Niveau : {self.level} ")
+        label_level.grid(row=1 ,column=20)
+        
         label_type.config(text=f"Type : {self.type} ")
+        label_type.grid(row=2 ,column=20)
+        
         label_atk.config(text=f"Attaques : {self.attacks} ")
+        label_atk.grid(row=3 ,column=20)
+       
         label_region.config(text=f"Région : {self.region} ")
+        label_region.grid(row=4 ,column=20)
+       
         label_evolution.config(text=f"Evolution : {self.evolution} ")
+        label_evolution.grid(row=5 ,column=20)
+
+        show_image(self.image)
 
 
 
@@ -32,6 +45,13 @@ class Pokemon:
 
 pokedex= []
 
+
+def show_image(link):
+    global pokemon_img
+    img = Image.open(link)
+    img = img.resize((200, 200))
+    pokemon_img = ImageTk.PhotoImage(img)
+    label_image.config(image=pokemon_img)
 
 def select_list(event):
     selection = list_pokemon.curselection()
@@ -61,25 +81,25 @@ def add_pokemon():
 
 
 def show_widget():
-    label_entry_name.pack()
-    entry_name.pack()
+    label_entry_name.grid(row=15,column=0)
+    entry_name.grid(row=15,column=1)
     
-    label_entry_level.pack()
-    entry_level.pack()
+    label_entry_level.grid(row=16,column=0)
+    entry_level.grid(row=16,column=1)
     
-    label_entry_type.pack()
-    entry_type.pack()
+    label_entry_type.grid(row=17,column=0)
+    entry_type.grid(row=17,column=1)
     
-    label_entry_evo.pack()
-    entry_evolution.pack()
+    label_entry_evo.grid(row=15,column=3)
+    entry_evolution.grid(row=15,column=4)
    
-    label_entry_atk.pack()
-    entry_atk.pack()
+    label_entry_atk.grid(row=16,column=3)
+    entry_atk.grid(row=16,column=4)
     
-    label_entry_region.pack()
-    entry_region.pack()
+    label_entry_region.grid(row=17,column=3)
+    entry_region.grid(row=17,column=4)
     
-    button_confirm_add.pack()
+    button_confirm_add.grid(row=19,column=2)
     
 def hide_widgets(): 
     
@@ -109,35 +129,35 @@ def hide_widgets():
 # _________________________________________________ Labels d'information des pokemons _______________________________________________
 
 label_image = tk.Label(frame)
-label_image.pack()
+label_image.grid(row=0 ,column=0, rowspan=7)
 
 label_name=tk.Label(frame, text="Nom :")
-label_name.pack()
+label_name.pack_forget()
 
 label_level=tk.Label(frame, text="Niveau :")
-label_level.pack()
+label_level.pack_forget()
 
 label_type=tk.Label(frame, text="Types :")
-label_type.pack()
+label_type.pack_forget()
 
 label_atk=tk.Label(frame, text="Attaques :")
-label_atk.pack()
+label_atk.pack_forget()
 
 label_region=tk.Label(frame, text="Région :")
-label_region.pack()
+label_region.pack_forget()
 
 label_evolution=tk.Label(frame, text="Stade d'évolution :")
-label_evolution.pack()
+label_evolution.pack_forget()
 
 #_________________________________________________ Composants interface ______________________________________________________________
 
 list_pokemon=tk.Listbox(frame)
-list_pokemon.pack()
+list_pokemon.grid(row=9 ,column=2, columnspan=5)
 list_pokemon.bind("<<ListboxSelect>>", select_list)
 
 
 button_add_poke=tk.Button(frame,text="Ajouter un Pokemon", command=show_widget)
-button_add_poke.pack()
+button_add_poke.grid(row=11 ,column=2, columnspan=5)
 
 #__________________________________________________ Ajout d'un pokemon _______________________________________________________________
 
@@ -184,3 +204,8 @@ fill_pokedex(pokedex)
 
 
 frame.mainloop()
+
+
+
+
+#Ameliorer appel d'image (preparer le chemin d'acces) / mise en page / conditions (si le champ n'est pas vide)
