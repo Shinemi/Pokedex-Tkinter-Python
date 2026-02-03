@@ -1,10 +1,12 @@
 import tkinter as tk
 from tkinter import *
 from PIL import Image, ImageTk
+from tkinter import messagebox
+
 
 frame = tk.Tk()
 frame.title("Pokédex Lucas")
-frame.geometry("400x700")
+frame.geometry("600x800")
 
 
 
@@ -25,10 +27,12 @@ class Pokemon:
         label_level.config(text=f"Niveau : {self.level} ")
         label_level.grid(row=1, column=1, sticky="w", padx=10)
         
-        label_type.config(text=f"Type : {self.type} ")
+        types_txt = " / ".join(self.type)
+        label_type.config(text=f"Types : {types_txt}")
         label_type.grid(row=2, column=1, sticky="w", padx=10)
-        
-        label_atk.config(text=f"Attaques : {self.attacks} ")
+            
+        attaques = " / ".join(self.attacks)
+        label_atk.config(text=f"Attaques : {attaques}")
         label_atk.grid(row=3, column=1, sticky="w", padx=10)
        
         label_region.config(text=f"Région : {self.region} ")
@@ -67,17 +71,47 @@ def fill_pokedex(pokedex):
 
 
 def add_pokemon():
+    attacks = [
+    entry_atk1.get(),
+    entry_atk2.get(),
+    entry_atk3.get(),
+    entry_atk4.get()
+    ]
+
+    types = [
+    entry_type1.get(),
+    entry_type2.get()
+    ]
+
     name_add=entry_name.get()
     lvl_add=entry_level.get()
-    type_add=entry_type.get()
+    type_add=types
     region_add=entry_region.get()
     evo_add=entry_evolution.get()
-    atk_add=entry_atk.get()
+    atk_add=attacks
     image_add=entry_image.get()
+
+    if not name_add:
+        messagebox.showerror("Erreur", "Le nom du Pokémon est obligatoire")
+        return
+    elif not lvl_add.isdigit():
+        messagebox.showerror("Erreur", "Le niveau doit être un nombre")
+        return
+    elif not region_add:
+        messagebox.showerror("Erreur", "La région du Pokémon est obligatoire")
+        return
+    elif len(types) == 0:
+        messagebox.showerror("Erreur", "Au moins un type est requis")
+        return
+    elif len(attacks) == 0:
+        messagebox.showerror("Erreur", "Au moins une attaque est requise")
+        return
+    else:
+        poke= Pokemon(name_add,lvl_add,type_add,atk_add,region_add,evo_add,image_add)
+        pokedex.append(poke)
+        fill_pokedex(pokedex)
     
-    poke= Pokemon(name_add,lvl_add,type_add,atk_add,region_add,evo_add,image_add)
-    pokedex.append(poke)
-    fill_pokedex(pokedex)
+    
     hide_widgets()
 
 
@@ -89,22 +123,34 @@ def show_widget():
     label_entry_level.grid(row=9, column=0, sticky="e", padx=10)
     entry_level.grid(row=9, column=1, sticky="w", padx=10)
     
-    label_entry_type.grid(row=10, column=0, sticky="e", padx=10)
-    entry_type.grid(row=10, column=1, sticky="w", padx=10)
+    label_entry_type1.grid(row=10, column=0, sticky="e", padx=10)
+    entry_type1.grid(row=10, column=1, sticky="w", padx=10)
+
+    label_entry_type2.grid(row=11, column=0, sticky="e", padx=10)
+    entry_type2.grid(row=11, column=1, sticky="w", padx=10)
     
-    label_entry_evo.grid(row=11, column=0, sticky="e", padx=10)
-    entry_evolution.grid(row=11, column=1, sticky="w", padx=10)
+    label_entry_evo.grid(row=12, column=0, sticky="e", padx=10)
+    entry_evolution.grid(row=12, column=1, sticky="w", padx=10)
    
-    label_entry_atk.grid(row=12, column=0, sticky="e", padx=10)
-    entry_atk.grid(row=12, column=1, sticky="w", padx=10)
+    label_entry_atk1.grid(row=13, column=0, sticky="e", padx=10)
+    entry_atk1.grid(row=13, column=1, sticky="w", padx=10)
+
+    label_entry_atk2.grid(row=14, column=0, sticky="e", padx=10)
+    entry_atk2.grid(row=14, column=1, sticky="w", padx=10)
+
+    label_entry_atk3.grid(row=15, column=0, sticky="e", padx=10)
+    entry_atk3.grid(row=15, column=1, sticky="w", padx=10)
+
+    label_entry_atk4.grid(row=16, column=0, sticky="e", padx=10)
+    entry_atk4.grid(row=16, column=1, sticky="w", padx=10)
+        
+    label_entry_region.grid(row=17, column=0, sticky="e", padx=10)
+    entry_region.grid(row=17,column=1, sticky="w", padx=10)
     
-    label_entry_region.grid(row=13, column=0, sticky="e", padx=10)
-    entry_region.grid(row=13,column=1, sticky="w", padx=10)
+    label_image_entry.grid(row=18, column=0, sticky="e", padx=10)
+    entry_image.grid(row=18,column=1, sticky="w", padx=10)
     
-    label_image_entry.grid(row=14, column=0, sticky="e", padx=10)
-    entry_image.grid(row=14,column=1, sticky="w", padx=10)
-    
-    button_confirm_add.grid(row=15, column=0, columnspan=2, pady=15)
+    button_confirm_add.grid(row=19, column=0, columnspan=2, pady=15)
     
 def hide_widgets(): 
     
@@ -114,14 +160,22 @@ def hide_widgets():
     label_entry_level.pack_forget()
     entry_level.pack_forget()
     
-    label_entry_type.pack_forget()
-    entry_type.pack_forget()
+    label_entry_type1.pack_forget()
+    entry_type1.pack_forget()
+    label_entry_type2.pack_forget()
+    entry_type2.pack_forget()
     
     label_entry_evo.pack_forget()
     entry_evolution.pack_forget()
    
-    label_entry_atk.pack_forget()
-    entry_atk.pack_forget()
+    label_entry_atk1.pack_forget()
+    entry_atk1.pack_forget()
+    label_entry_atk2.pack_forget()
+    entry_atk2.pack_forget()
+    label_entry_atk3.pack_forget()
+    entry_atk3.pack_forget()
+    label_entry_atk4.pack_forget()
+    entry_atk4.pack_forget()
     
     label_entry_region.pack_forget()
     entry_region.pack_forget()
@@ -157,12 +211,12 @@ label_evolution.pack_forget()
 #_________________________________________________ Composants interface ______________________________________________________________
 
 list_pokemon=tk.Listbox(frame, bg="red", fg="white")
-list_pokemon.grid(row=6, column=0, columnspan=2, pady=10)
+list_pokemon.grid(row=6, column=0, columnspan=2,sticky="ew", pady=10)
 list_pokemon.bind("<<ListboxSelect>>", select_list)
 
 
 button_add_poke=tk.Button(frame,text="Ajouter un Pokemon", command=show_widget, bg="red", fg="white")
-button_add_poke.grid(row=7, column=0, columnspan=2, pady=5)
+button_add_poke.grid(row=7, column=0, columnspan=2,sticky="ew", pady=5)
 #__________________________________________________ Ajout d'un pokemon _______________________________________________________________
 
 label_entry_name=tk.Label(frame,text="Nom :")
@@ -175,20 +229,40 @@ label_entry_level.pack_forget()
 entry_level=tk.Entry(frame)
 entry_level.pack_forget()
 
-label_entry_type=tk.Label(frame,text="Type :")
-label_entry_type.pack_forget()
-entry_type=tk.Entry(frame)
-entry_type.pack_forget()
+label_entry_type1 = tk.Label(frame, text="Type 1 :")
+label_entry_type1.pack_forget()
+entry_type1 = tk.Entry(frame)
+entry_type1.pack_forget()
+
+label_entry_type2 = tk.Label(frame, text="Type 2 :")
+label_entry_type2.pack_forget()
+entry_type2 = tk.Entry(frame)
+entry_type2.pack_forget()
 
 label_entry_region=tk.Label(frame,text="Region :")
 label_entry_region.pack_forget()
 entry_region=tk.Entry(frame)
 entry_region.pack_forget()
 
-label_entry_atk=tk.Label(frame,text="Attaques :")
-label_entry_atk.pack_forget()
-entry_atk=tk.Entry(frame)
-entry_atk.pack_forget()
+label_entry_atk1 = tk.Label(frame, text="Attaque 1 :")
+label_entry_atk1.pack_forget()
+entry_atk1 = tk.Entry(frame)
+entry_atk1.pack_forget()
+
+label_entry_atk2 = tk.Label(frame, text="Attaque 2 :")
+label_entry_atk2.pack_forget()
+entry_atk2 = tk.Entry(frame)
+entry_atk2.pack_forget()
+
+label_entry_atk3 = tk.Label(frame, text="Attaque 3 :")
+label_entry_atk3.pack_forget()
+entry_atk3 = tk.Entry(frame)
+entry_atk3.pack_forget()
+
+label_entry_atk4 = tk.Label(frame, text="Attaque 4 :")
+label_entry_atk4.pack_forget()
+entry_atk4 = tk.Entry(frame)
+entry_atk4.pack_forget()
 
 label_entry_evo=tk.Label(frame,text="Stade Evolution :")
 label_entry_evo.pack_forget()
@@ -208,7 +282,7 @@ button_confirm_add.pack_forget()
 
 
 
-poke= Pokemon("pikachu",10,"Electric", "Lightning", "kanto", 2, "./pokemon-img/Pikachu.png")
+poke= Pokemon("pikachu",10,["Electric"], ["Éclair", "Vive-Attaque", "Tonnerre"], "kanto", 2, "./pokemon-img/Pikachu.png")
 pokedex.append(poke)
 fill_pokedex(pokedex)
 
