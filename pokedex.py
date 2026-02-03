@@ -141,7 +141,18 @@ def add_pokemon():
         hide_widgets()
     
     
-
+def delete_pokemon():
+    selection = list_pokemon.curselection()
+    
+    if not selection:
+        messagebox.showwarning("Attention", "Aucun Pokémon sélectionné")
+        return
+    
+    index = selection[0]
+    
+    del pokedex[index]
+    save_pokedex(pokedex)
+    fill_pokedex(pokedex)
 
 
 def show_widget():
@@ -239,6 +250,9 @@ list_pokemon=tk.Listbox(frame, bg="red", fg="white")
 list_pokemon.grid(row=6, column=0, columnspan=2,sticky="ew", pady=10)
 list_pokemon.bind("<<ListboxSelect>>", select_list)
 
+
+button_del_poke=tk.Button(frame,text="Supprimer le Pokemon sélectionné", command=delete_pokemon, bg="black", fg="red")
+button_del_poke.grid(row=20, column=0, columnspan=2,sticky="ew", pady=5)
 
 button_add_poke=tk.Button(frame,text="Ajouter un Pokemon", command=show_widget, bg="red", fg="white")
 button_add_poke.grid(row=7, column=0, columnspan=2,sticky="ew", pady=5)
