@@ -6,7 +6,7 @@ from tkinter import messagebox
 
 frame = tk.Tk()
 frame.title("Pokédex Lucas")
-frame.geometry("600x800")
+frame.geometry("500x800")
 
 
 
@@ -107,13 +107,16 @@ def add_pokemon():
     entry_type2.get()
     ]
 
+    pokeName=entry_name.get()
+
+
     name_add=entry_name.get()
     lvl_add=entry_level.get()
     type_add=types
     region_add=entry_region.get()
     evo_add=entry_evolution.get()
     atk_add=attacks
-    image_add=entry_image.get()
+    image_add=f"./pokemon-img/{pokeName}.png"
 
     if not name_add:
         messagebox.showerror("Erreur", "Le nom du Pokémon est obligatoire")
@@ -172,8 +175,8 @@ def show_widget():
     label_entry_region.grid(row=17, column=0, sticky="e", padx=10)
     entry_region.grid(row=17,column=1, sticky="w", padx=10)
     
-    label_image_entry.grid(row=18, column=0, sticky="e", padx=10)
-    entry_image.grid(row=18,column=1, sticky="w", padx=10)
+    # label_image_entry.grid(row=18, column=0, sticky="e", padx=10)
+    # entry_image.grid(row=18,column=1, sticky="w", padx=10)
     
     button_confirm_add.grid(row=19, column=0, columnspan=2, pady=15)
     
@@ -205,8 +208,8 @@ def hide_widgets():
     label_entry_region.grid_forget()
     entry_region.grid_forget()
     
-    label_image_entry.grid_forget()
-    entry_image.grid_forget()
+    # label_image_entry.grid_forget()
+    # entry_image.grid_forget()
 
     button_confirm_add.grid_forget()
     
@@ -297,11 +300,11 @@ label_entry_evo.grid_forget()
 entry_evolution=tk.Entry(frame)
 entry_evolution.grid_forget()
 
-label_image_entry=tk.Label(frame,text="Image :")
-label_image_entry.grid_forget()
-entry_image=tk.Entry(frame)
-entry_image.insert(END,"./pokemon-img/")
-entry_image.grid_forget()
+# label_image_entry=tk.Label(frame,text="Image :")
+# label_image_entry.grid_forget()
+# entry_image=tk.Entry(frame)
+# entry_image.insert(END,)
+# entry_image.grid_forget()
 
 
 button_confirm_add=tk.Button(frame, text="Confirmer", command=add_pokemon, background="red", fg="white")
