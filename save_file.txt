@@ -1,0 +1,2 @@
+pikachu|10|Electric|Éclair,Vive-Attaque,Tonnerre|kanto|2|./pokemon-img/Pikachu.png
+abo|10|poison,|toxic,,,|kanto|1|./pokemon-img/Abo.png

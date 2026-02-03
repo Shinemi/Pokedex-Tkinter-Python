@@ -42,6 +42,7 @@ class Pokemon:
         label_evolution.grid(row=5, column=1, sticky="w", padx=10)
 
         show_image(self.image)
+        
 
 
 
@@ -50,6 +51,29 @@ class Pokemon:
 
 pokedex= []
 
+def load_save():
+    with open("save_file.txt", "r", encoding="utf-8") as f:
+        for line in f:
+            data = line.strip().split("|")
+
+            poke = Pokemon(
+                name=data[0],
+                level=data[1],
+                type=data[2].split(",") if data[2] else [],
+                attacks=data[3].split(",") if data[3] else [],
+                region=data[4],
+                evolution=data[5],
+                image=data[6]
+            )
+
+            pokedex.append(poke)
+
+
+def save_pokedex(pokedex):
+    with open("save_file.txt", "w", encoding="utf-8") as save_file:
+        for poke in pokedex:
+            line = (f"{poke.name}|{poke.level}|{','.join(poke.type)}|{','.join(poke.attacks)}|{poke.region}|{poke.evolution}|{poke.image}\n")
+            save_file.write(line)
 
 def show_image(link):
     global pokemon_img
@@ -110,9 +134,10 @@ def add_pokemon():
         poke= Pokemon(name_add,lvl_add,type_add,atk_add,region_add,evo_add,image_add)
         pokedex.append(poke)
         fill_pokedex(pokedex)
+        save_pokedex(pokedex)
+        hide_widgets()
     
     
-    hide_widgets()
 
 
 
@@ -154,33 +179,36 @@ def show_widget():
     
 def hide_widgets(): 
     
-    label_entry_name.pack_forget()
-    entry_name.pack_forget()
+    label_entry_name.grid_forget()
+    entry_name.grid_forget()
     
-    label_entry_level.pack_forget()
-    entry_level.pack_forget()
+    label_entry_level.grid_forget()
+    entry_level.grid_forget()
     
-    label_entry_type1.pack_forget()
-    entry_type1.pack_forget()
-    label_entry_type2.pack_forget()
-    entry_type2.pack_forget()
+    label_entry_type1.grid_forget()
+    entry_type1.grid_forget()
+    label_entry_type2.grid_forget()
+    entry_type2.grid_forget()
     
-    label_entry_evo.pack_forget()
-    entry_evolution.pack_forget()
+    label_entry_evo.grid_forget()
+    entry_evolution.grid_forget()
    
-    label_entry_atk1.pack_forget()
-    entry_atk1.pack_forget()
-    label_entry_atk2.pack_forget()
-    entry_atk2.pack_forget()
-    label_entry_atk3.pack_forget()
-    entry_atk3.pack_forget()
-    label_entry_atk4.pack_forget()
-    entry_atk4.pack_forget()
+    label_entry_atk1.grid_forget()
+    entry_atk1.grid_forget()
+    label_entry_atk2.grid_forget()
+    entry_atk2.grid_forget()
+    label_entry_atk3.grid_forget()
+    entry_atk3.grid_forget()
+    label_entry_atk4.grid_forget()
+    entry_atk4.grid_forget()
     
-    label_entry_region.pack_forget()
-    entry_region.pack_forget()
+    label_entry_region.grid_forget()
+    entry_region.grid_forget()
     
-    button_confirm_add.pack_forget()
+    label_image_entry.grid_forget()
+    entry_image.grid_forget()
+
+    button_confirm_add.grid_forget()
     
     
     
@@ -191,22 +219,22 @@ label_image = tk.Label(frame)
 label_image.grid(row=0, column=0, rowspan=6, padx=10, pady=10)
 
 label_name=tk.Label(frame, text="Nom :")
-label_name.pack_forget()
+label_name.grid_forget()
 
 label_level=tk.Label(frame, text="Niveau :")
-label_level.pack_forget()
+label_level.grid_forget()
 
 label_type=tk.Label(frame, text="Types :")
-label_type.pack_forget()
+label_type.grid_forget()
 
 label_atk=tk.Label(frame, text="Attaques :")
-label_atk.pack_forget()
+label_atk.grid_forget()
 
 label_region=tk.Label(frame, text="Région :")
-label_region.pack_forget()
+label_region.grid_forget()
 
 label_evolution=tk.Label(frame, text="Stade d'évolution :")
-label_evolution.pack_forget()
+label_evolution.grid_forget()
 
 #_________________________________________________ Composants interface ______________________________________________________________
 
@@ -220,76 +248,74 @@ button_add_poke.grid(row=7, column=0, columnspan=2,sticky="ew", pady=5)
 #__________________________________________________ Ajout d'un pokemon _______________________________________________________________
 
 label_entry_name=tk.Label(frame,text="Nom :")
-label_entry_name.pack_forget()
+label_entry_name.grid_forget()
 entry_name=tk.Entry(frame)
-entry_name.pack_forget()
+entry_name.grid_forget()
 
 label_entry_level=tk.Label(frame,text="Niveau :")
-label_entry_level.pack_forget()
+label_entry_level.grid_forget()
 entry_level=tk.Entry(frame)
-entry_level.pack_forget()
+entry_level.grid_forget()
 
 label_entry_type1 = tk.Label(frame, text="Type 1 :")
-label_entry_type1.pack_forget()
+label_entry_type1.grid_forget()
 entry_type1 = tk.Entry(frame)
-entry_type1.pack_forget()
+entry_type1.grid_forget()
 
 label_entry_type2 = tk.Label(frame, text="Type 2 :")
-label_entry_type2.pack_forget()
+label_entry_type2.grid_forget()
 entry_type2 = tk.Entry(frame)
-entry_type2.pack_forget()
+entry_type2.grid_forget()
 
 label_entry_region=tk.Label(frame,text="Region :")
-label_entry_region.pack_forget()
+label_entry_region.grid_forget()
 entry_region=tk.Entry(frame)
-entry_region.pack_forget()
+entry_region.grid_forget()
 
 label_entry_atk1 = tk.Label(frame, text="Attaque 1 :")
-label_entry_atk1.pack_forget()
+label_entry_atk1.grid_forget()
 entry_atk1 = tk.Entry(frame)
-entry_atk1.pack_forget()
+entry_atk1.grid_forget()
 
 label_entry_atk2 = tk.Label(frame, text="Attaque 2 :")
-label_entry_atk2.pack_forget()
+label_entry_atk2.grid_forget()
 entry_atk2 = tk.Entry(frame)
-entry_atk2.pack_forget()
+entry_atk2.grid_forget()
 
 label_entry_atk3 = tk.Label(frame, text="Attaque 3 :")
-label_entry_atk3.pack_forget()
+label_entry_atk3.grid_forget()
 entry_atk3 = tk.Entry(frame)
-entry_atk3.pack_forget()
+entry_atk3.grid_forget()
 
 label_entry_atk4 = tk.Label(frame, text="Attaque 4 :")
-label_entry_atk4.pack_forget()
+label_entry_atk4.grid_forget()
 entry_atk4 = tk.Entry(frame)
-entry_atk4.pack_forget()
+entry_atk4.grid_forget()
 
 label_entry_evo=tk.Label(frame,text="Stade Evolution :")
-label_entry_evo.pack_forget()
+label_entry_evo.grid_forget()
 entry_evolution=tk.Entry(frame)
-entry_evolution.pack_forget()
+entry_evolution.grid_forget()
 
 label_image_entry=tk.Label(frame,text="Image :")
-label_image_entry.pack_forget()
+label_image_entry.grid_forget()
 entry_image=tk.Entry(frame)
 entry_image.insert(END,"./pokemon-img/")
-entry_image.pack_forget()
+entry_image.grid_forget()
 
 
 button_confirm_add=tk.Button(frame, text="Confirmer", command=add_pokemon, background="red", fg="white")
-button_confirm_add.pack_forget()
+button_confirm_add.grid_forget()
 
 
 
 
-poke= Pokemon("pikachu",10,["Electric"], ["Éclair", "Vive-Attaque", "Tonnerre"], "kanto", 2, "./pokemon-img/Pikachu.png")
-pokedex.append(poke)
+load_save()
 fill_pokedex(pokedex)
-
 
 frame.mainloop()
 
 
 
 
-#Ameliorer appel d'image (preparer le chemin d'acces) / mise en page / conditions (si le champ n'est pas vide) / fix les entry (double types), 4 attaques.
+#Ameliorer appel d'image (preparer le chemin d'acces en fonction du nom) / modifier / supprimer
