@@ -175,9 +175,6 @@ def show_widget():
     label_entry_region.grid(row=17, column=0, sticky="e", padx=10)
     entry_region.grid(row=17,column=1, sticky="w", padx=10)
     
-    # label_image_entry.grid(row=18, column=0, sticky="e", padx=10)
-    # entry_image.grid(row=18,column=1, sticky="w", padx=10)
-    
     button_confirm_add.grid(row=19, column=0, columnspan=2, pady=15)
     
 def hide_widgets(): 
@@ -207,9 +204,6 @@ def hide_widgets():
     
     label_entry_region.grid_forget()
     entry_region.grid_forget()
-    
-    # label_image_entry.grid_forget()
-    # entry_image.grid_forget()
 
     button_confirm_add.grid_forget()
     
@@ -299,13 +293,6 @@ label_entry_evo=tk.Label(frame,text="Stade Evolution :")
 label_entry_evo.grid_forget()
 entry_evolution=tk.Entry(frame)
 entry_evolution.grid_forget()
-
-# label_image_entry=tk.Label(frame,text="Image :")
-# label_image_entry.grid_forget()
-# entry_image=tk.Entry(frame)
-# entry_image.insert(END,)
-# entry_image.grid_forget()
-
 
 button_confirm_add=tk.Button(frame, text="Confirmer", command=add_pokemon, background="red", fg="white")
 button_confirm_add.grid_forget()
