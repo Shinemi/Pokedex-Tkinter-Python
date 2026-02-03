@@ -1,12 +1,12 @@
-#Pokédex – Application Python (Tkinter)
-##Description
+# Pokédex – Application Python (Tkinter)
+## Description
 
 Ce projet est une application Pokédex développée en Python avec Tkinter.
 Elle permet de consulter, ajouter, supprimer et sauvegarder des Pokémon avec leurs informations principales.
 
 Les données sont stockées dans un fichier texte afin d’être persistantes entre deux lancements du programme.
 
-##Technologies utilisées
+## Technologies utilisées
 
 Python 3
 
@@ -16,30 +16,30 @@ Pillow (PIL) pour la gestion des images
 
 Fichier texte (save_file.txt) pour la sauvegarde
 
-##Fonctionnalités
+## Fonctionnalités
 
-###Liste des Pokémon (Listbox)
+### Liste des Pokémon (Listbox)
 
-###Affichage des informations d’un Pokémon :
+### Affichage des informations d’un Pokémon :
 
--Nom
+- Nom
 
--Niveau
+- Niveau
 
--Types
+- Types
 
--Attaques
+- Attaques
 
--Région
+- Région
 
--Évolution
+- Évolution
 
--Image
+- Image
 
-###Ajout d’un Pokémon via un formulaire
+### Ajout d’un Pokémon via un formulaire
 
-###Suppression d’un Pokémon sélectionné
+### Suppression d’un Pokémon sélectionné
 
-###Sauvegarde automatique dans un fichier texte
+### Sauvegarde automatique dans un fichier texte
 
-###Chargement automatique des Pokémon au lancement
+### Chargement automatique des Pokémon au lancement
