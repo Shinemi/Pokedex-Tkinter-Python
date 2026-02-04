@@ -40,6 +40,9 @@ Fichier texte (save_file.txt) pour la sauvegarde
 
 ### Suppression d’un Pokémon sélectionné
 
+### Modification d'un Pokémon sélectionné 
+
 ### Sauvegarde automatique dans un fichier texte
 
 ### Chargement automatique des Pokémon au lancement
+
