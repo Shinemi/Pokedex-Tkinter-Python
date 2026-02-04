@@ -1,2 +1,2 @@
-pikachu|10|Electric|Éclair,Vive-Attaque,Tonnerre|kanto|2|./pokemon-img/Pikachu.png
+pikachu|15|electric,|eclair,vive attaque,,|kanto|2|./pokemon-img/pikachu.png
 Dracaufeu|50|feu,vol|lance flamme,lance flamme,lance flamme,lance flamme|kanto|3|./pokemon-img/Dracaufeu.png

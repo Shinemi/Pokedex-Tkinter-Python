@@ -154,6 +154,42 @@ def delete_pokemon():
     save_pokedex(pokedex)
     fill_pokedex(pokedex)
 
+def modif_pokemon():
+    selection = list_pokemon.curselection()
+    if not selection:
+        messagebox.showwarning("Attention", "Aucun Pokémon sélectionné")
+        return
+
+    index = selection[0]
+
+    attacks = [
+        entry_atk1.get(),
+        entry_atk2.get(),
+        entry_atk3.get(),
+        entry_atk4.get()
+    ]
+
+    types = [
+        entry_type1.get(),
+        entry_type2.get()
+    ]
+
+    pokeName = entry_name.get()
+
+    new_poke = Pokemon(
+        pokeName,
+        entry_level.get(),
+        types,
+        attacks,
+        entry_region.get(),
+        entry_evolution.get(),
+        f"./pokemon-img/{pokeName}.png"
+    )
+
+    pokedex[index] = new_poke
+    save_pokedex(pokedex)
+    fill_pokedex(pokedex)
+
 
 def show_widget():
     label_entry_name.grid(row=8, column=0, sticky="e", padx=10)
@@ -250,11 +286,13 @@ list_pokemon=tk.Listbox(frame, bg="red", fg="white")
 list_pokemon.grid(row=6, column=0, columnspan=2,sticky="ew", pady=10)
 list_pokemon.bind("<<ListboxSelect>>", select_list)
 
-
-button_del_poke=tk.Button(frame,text="Supprimer le Pokemon sélectionné", command=delete_pokemon, bg="black", fg="red")
+button_del_poke=tk.Button(frame,text="Modifer le Pokemon sélectionné", command=modif_pokemon, bg="black", fg="red")
 button_del_poke.grid(row=20, column=0, columnspan=2,sticky="ew", pady=5)
 
-button_add_poke=tk.Button(frame,text="Ajouter un Pokemon", command=show_widget, bg="red", fg="white")
+button_del_poke=tk.Button(frame,text="Supprimer le Pokemon sélectionné", command=delete_pokemon, bg="black", fg="red")
+button_del_poke.grid(row=21, column=0, columnspan=2,sticky="ew", pady=5)
+
+button_add_poke=tk.Button(frame,text="Ajouter ou Modifier un Pokemon", command=show_widget, bg="red", fg="white")
 button_add_poke.grid(row=7, column=0, columnspan=2,sticky="ew", pady=5)
 #__________________________________________________ Ajout d'un pokemon _______________________________________________________________
 
