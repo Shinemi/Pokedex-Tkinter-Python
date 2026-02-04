@@ -346,7 +346,7 @@ label_entry_evo.grid_forget()
 entry_evolution=tk.Entry(frame)
 entry_evolution.grid_forget()
 
-button_confirm_add=tk.Button(frame, text="Confirmer", command=add_pokemon, background="red", fg="white")
+button_confirm_add=tk.Button(frame, text="Confirmer l'Ajout", command=add_pokemon, background="red", fg="white")
 button_confirm_add.grid_forget()
 
 
